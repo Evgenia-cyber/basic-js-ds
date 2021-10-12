@@ -19,7 +19,28 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  */
 
-module.exports = function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+// См. теорию в st-queue
+
+module.exports = function removeKFromList(l, k) {
+  // throw new NotImplementedError('Not implemented');
+
+  // надо пройти по всему связанному списку и сравнить value текущего элемента с k - если совпали => удалить этот элемент из связанного списка
+  // если с k совпал с первым элементом списка, то надо удалить этот элемент и head теперь должен указывать на новый первый элемент
+
+  if (l.value === k) {
+    l = l.next;
+  }
+
+  let currentElement = l;
+  let nextElement = currentElement.next;
+
+  while (nextElement) {
+    if (nextElement.value === k) {
+      currentElement.next = nextElement.next;
+    }
+    currentElement = currentElement.next;
+    nextElement = currentElement.next;
+  }
+
+  return l;
+};
